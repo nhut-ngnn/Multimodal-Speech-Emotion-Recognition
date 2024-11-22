@@ -59,6 +59,11 @@ def train_and_evaluate(model, train_loader, val_loader, num_epochs, lr=0.0001, s
     optimizer = optim.Adam(params=model.parameters(), lr=lr)
     criterion = nn.CrossEntropyLoss()
     lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.05)
+    
+    # #wav2vec
+    # optimizer = optim.Adam(params=model.parameters(), lr=0.0001)
+    # criterion = nn.CrossEntropyLoss()
+    # lr_scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=20, gamma=0.05)
 
     train_loss_hist, val_loss_hist = [], []
     train_wa_hist, val_wa_hist = [], []
