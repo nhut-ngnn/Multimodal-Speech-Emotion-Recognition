@@ -15,7 +15,7 @@ from speechbrain.pretrained import EncoderClassifier
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Constants
-MELD_TRAIN_PATH = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/Multimodal-Speech-Emotion-Recognition/metadata/MELD_metadata.csv"
+MELD_TRAIN_PATH = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/Multimodal-Speech-Emotion-Recognition/metadata/MELD_metadata_convert.csv"
 OUTPUT_DIR = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/"
 TOKENIZER = BertTokenizer.from_pretrained('bert-base-uncased')
 TEXT_MODEL = BertModel.from_pretrained('bert-base-uncased').to(device)
