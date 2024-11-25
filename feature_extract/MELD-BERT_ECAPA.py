@@ -11,6 +11,7 @@ import pickle
 import pandas as pd
 from transformers import BertTokenizer, BertModel
 from speechbrain.pretrained import EncoderClassifier
+from tqdm import tqdm  # Import tqdm for progress bar
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
@@ -48,7 +49,8 @@ def process_dataset(input_path, output_path, tokenizer, text_model, audio_model,
     data_list = pd.read_csv(input_path)
     processed_data = []
     with torch.no_grad():
-        for idx, row in data_list.iterrows():
+        # Add a progress bar here
+        for idx, row in tqdm(data_list.iterrows(), total=len(data_list), desc="Processing dataset"):
             processed_data.append(process_row(row, tokenizer, text_model, audio_model, device))
     with open(output_path, "wb") as f:
         pickle.dump(processed_data, f)
