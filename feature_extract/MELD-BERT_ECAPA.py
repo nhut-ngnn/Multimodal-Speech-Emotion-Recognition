@@ -16,8 +16,9 @@ from tqdm import tqdm  # Import tqdm for progress bar
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Constants
-MELD_TRAIN_PATH = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/Multimodal-Speech-Emotion-Recognition/metadata/MELD_metadata_convert.csv"
-OUTPUT_DIR = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/"
+MELD_TRAIN_PATH = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/Multimodal-Speech-Emotion-Recognition/metadata/MELD_metadata_train.csv"
+MELD_VAL_PATH = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/Multimodal-Speech-Emotion-Recognition/metadata/MELD_metadata_val.csv"
+OUTPUT_DIR = "C:/Users/admin/Documents/Speech-Emotion_Recognition-2/features"
 TOKENIZER = BertTokenizer.from_pretrained('bert-base-uncased')
 TEXT_MODEL = BertModel.from_pretrained('bert-base-uncased').to(device)
 AUDIO_MODEL = EncoderClassifier.from_hparams(source="speechbrain/spkrec-ecapa-voxceleb")
@@ -63,15 +64,24 @@ def main():
     text_model = TEXT_MODEL
     audio_model = AUDIO_MODEL
 
-    print("Processing training set...")
+    # print("Processing training set...")
+    # process_dataset(
+    #     MELD_TRAIN_PATH,
+    #     f"{OUTPUT_DIR}MELD_BERT_ECAPA_train.pkl",
+    #     tokenizer,
+    #     text_model,
+    #     audio_model,
+    #     device
+    # )
+
+    print("Processing validation set...")
     process_dataset(
-        MELD_TRAIN_PATH,
-        f"{OUTPUT_DIR}MELD_BERT_ECAPA_train.pkl",
+        MELD_VAL_PATH,
+        f"{OUTPUT_DIR}MELD_BERT_ECAPA_val.pkl",
         tokenizer,
         text_model,
         audio_model,
         device
     )
-
 if __name__ == "__main__":
     main()
